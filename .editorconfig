@@ -1,0 +1,13 @@
+# EditorConfig for this project
+# For details: https://editorconfig.org
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.py]
+indent_style = space
+indent_size = 4
+remove_trailing_whitespace = true

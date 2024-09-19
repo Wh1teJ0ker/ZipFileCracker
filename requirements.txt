@@ -1,0 +1,3 @@
+# Dependencies for zipCracker.
+# Use `pip install -r requirements.txt` to install dependencies.
+# Currently none is required.
