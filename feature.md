@@ -14,12 +14,13 @@
 
 - `zipCracker`
 - core 核心处理模块
-  - main 负责直接接受参数（下传到commands？）
+  - main 负责直接接受参数(下传到commands)
   - commands 负责参数解析与分层调用
 - modules 所有子模块，扩展功能实现
+  - all 一键化根据默认处理逻辑对压缩包进行自动化分析
   - info 检测并显示基本信息（压缩包版本、结构、文件列表）
-  - crc 利用CRC32值爆破(1-6)
-  - headcrack 检测并修复伪加密
+  - crc 利用CRC32值爆破(1-6)[参考一](https://github.com/AabyssZG/CRC32-Tools)[参考二](https://github.com/theonlypwner/crc32)
+  - headcrack 检测并修复伪加密(在实际过程直接使用分离的方法更为有效)
   - passcrack 使用字典爆破压缩包(后续添加其他爆破方式)(zip,rar,7z) (拟使用GO完成爆破模块)
   - plain-text 明文攻击(参考bkcrack)
        
