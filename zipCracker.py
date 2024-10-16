@@ -12,4 +12,5 @@ print("""
        |_|                                                     
 """)
 
-sys.exit(zipCracker.main())
+# Exit after the launch process exited
+sys.exit(zipCracker.launch())
