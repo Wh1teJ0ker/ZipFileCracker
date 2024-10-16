@@ -4,6 +4,8 @@ import time
 from math import floor
 from typing import TextIO
 
+from zipCracker.util.datetime import format_struct_time
+
 initialized: bool = False
 
 LOG_PATH_DEFAULT: str = "logs"
@@ -70,7 +72,7 @@ def log(level: str, module: str, message: str) -> None:
     except KeyError:
         log_level = level
 
-    logfile.write(f"[{log_level}] {module}@{time.localtime()}: {message}\n")
+    logfile.write(f"[{log_level}] {module}@{format_struct_time(time.localtime())}: {message}\n")
 
 
 def info(message: str, module: str) -> None:
