@@ -8,12 +8,12 @@ from zipCracker.util import cli
 
 # A module must be imported to be found by getattr.
 import zipCracker.modules as modules
-from zipCracker.modules import test
 
 
 def main():
     args: list[str] = sys.argv[1:]
     logger.debug(f"Command line arguments: {args}", "Main")
+    modules.load_modules()
 
     if len(args) == 0:
         cli.print_and_log(msg="Specify a command first. Execute with -h to get a list of commands.",
@@ -27,6 +27,8 @@ def main():
         elif args.__contains__("--help"):
             # TODO: Get help content for individual modules
             docs.print_help()
+        else:
+            modules.call(args[0], args[1:])
 
 
 def get_module(name: str):
