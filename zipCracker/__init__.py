@@ -4,6 +4,7 @@
 __license__ = "MIT"
 __version__ = "0.0.1 alpha"
 __authors__ = ["CloneWith", "Wh1teJ0ker"]
+__website__ = "https://github.com/Wh1teJ0ker/ZipFileCracker"
 
 from zipCracker import core
 from zipCracker.util import logger
