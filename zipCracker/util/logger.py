@@ -28,9 +28,9 @@ def init() -> None:
     full_file_name: str = f"{LOGFILE_DEFAULT}-{floor(time.time())}.log"
 
     try:
-        logfile = open(full_file_name, "w")
+        logfile = open(full_file_name, "w", encoding="utf-8")
         initialized = True
-        log("info", "Logger", "Logger initialized")
+        log("info", __name__, "Logger initialized")
 
     except IOError as e:
         print(e)
