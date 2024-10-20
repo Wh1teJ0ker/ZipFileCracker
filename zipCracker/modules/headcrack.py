@@ -2,13 +2,16 @@
 
 import zipfile
 import zipCracker.util.cli as cli
-import zipCracker.util.logger as logger
 
-__doc__ = """
-Check for fake encryption by reading archive file headers.
+__description__ = """Check for encryption by reading archive file headers.
+读取压缩文件头，检测加密情况。"""
 
-Usage: headcrack <archive file>
-"""
+__usage__ = """Usage: headcrack <archive file>
+用法：headcrack <压缩文件>"""
+
+__doc__ = f"""headcrack: {__description__}
+
+{__usage__}"""
 
 
 def judge_zip(file_path: str):

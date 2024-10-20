@@ -4,7 +4,7 @@ import sys
 from zipCracker.util import COLORS
 from zipCracker.util import logger
 
-ARG_VERBOSE = True
+ARG_VERBOSE = False
 """
 If we should print verbose output.
 This is subject to change with command line arguments.
@@ -17,16 +17,19 @@ SYM: dict[str, str] = {
     "error": COLORS["bold"] + COLORS["red"] + "Error" + COLOR_POST,
     "warn": COLORS["bold"] + COLORS["yellow"] + "Warning" + COLOR_POST,
     "info": COLORS["bold"] + COLORS["blue"] + "Info" + COLOR_POST,
-    "debug": "Verbose" + COLOR_POST
+    "debug": COLORS["bold"] + "Verbose" + COLOR_POST
 }
 
 
 def print_and_log(msg: str, level: str = "info", module: str = "Generic", nolog: bool = False):
     """
     Print prettified message and log it when necessary.
+
+    输出格式化消息，必要时记录到日志。
     """
 
-    print("{0}: {1}".format(SYM[level], msg))
+    if level != "debug" or (level == "debug" and ARG_VERBOSE):
+        print("{0}: {1}".format(SYM[level], msg))
 
     if nolog is not True:
         try:
@@ -41,7 +44,7 @@ def exit_with_code(code: int):
     """
     Make the program exit gently with an exit code.
 
-    This function would 
+    使程序做好清理工作后带退出码退出。
     """
     if code is not 0:
         logger.error(f"An error occurred, exiting with code {code}.", __name__)

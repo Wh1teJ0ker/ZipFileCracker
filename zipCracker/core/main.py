@@ -26,6 +26,7 @@ def main():
                 docs.print_version()
         elif args.__contains__("--help"):
             # TODO: Get help content for individual modules
+            # TODO: 获取各个模块的帮助内容
             docs.print_help()
         else:
             modules.call(args[0], args[1:])
@@ -35,6 +36,8 @@ def get_module(name: str):
     """
     Returns a module with the given name.
     If the module is not found, None is returned.
+
+    返回给定名称的模块，若找不到则返回 None。
     """
     try:
         return getattr(modules, name)

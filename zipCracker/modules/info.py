@@ -4,11 +4,15 @@ import zipfile
 import zipCracker.util.logger as logger
 import zipCracker.util.cli as cli
 
-__doc__ = """
-Get basic information about a specific archive file.
+__description__ = """Get basic information about a specific archive file.
+获取指定压缩文件的基本信息。"""
 
-Usage: info <archive file>
-"""
+__usage__ = """Usage: info <archive file>
+用法：info <压缩文件>"""
+
+__doc__ = f"""info: {__description__}
+
+{__usage__}"""
 
 __commands__ = {
     # TODO

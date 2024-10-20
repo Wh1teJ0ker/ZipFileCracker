@@ -11,9 +11,11 @@ from zipCracker.util import logger
 import zipCracker.core.main
 
 
-def launch() -> None:
+def launch():
     """
     Prepare the basic framework, then call the main module.
+
+    准备基本框架后调用主模块。
     """
     # Prepare for loggers and command line interface here
     logger.init()

@@ -21,6 +21,8 @@ def init() -> None:
     """
     Initialize the logging module and open the file for logging.
     The default log name is `cracker-<Time in seconds>.log`.
+
+    初始化日志模块，并打开日志文件。默认文件名如上。
     """
     global initialized
     global logfile
@@ -40,6 +42,8 @@ def init() -> None:
 def cleanup() -> None:
     """
     Close the logging file stream.
+
+    关闭日志文件流。
     """
     global logfile
     global initialized
@@ -58,6 +62,8 @@ def log(level: str, module: str, message: str) -> None:
     """
     A general interface for logging.
     This function is used by other specific log functions.
+
+    日志通用接口，被其他特定日志函数使用。
     """
     global logfile
 
@@ -78,6 +84,8 @@ def log(level: str, module: str, message: str) -> None:
 def info(message: str, module: str) -> None:
     """
     Log an information message.
+
+    记录信息级消息。
     """
     log("info", module, message)
 
@@ -85,6 +93,8 @@ def info(message: str, module: str) -> None:
 def warn(message: str, module: str) -> None:
     """
     Log a warning message.
+
+    记录警告级消息。
     """
     log("warn", module, message)
 
@@ -92,6 +102,8 @@ def warn(message: str, module: str) -> None:
 def error(message: str, module: str) -> None:
     """
     Log an error message.
+
+    记录错误级消息。
     """
     log("error", module, message)
 
@@ -100,5 +112,7 @@ def debug(message: str, module: str) -> None:
     """
     Log a debug message.
     This should be written into the log file only with the corresponding switch on.
+
+    记录调试级消息，应仅在调试开关打开时写入。
     """
     log("debug", module, message)
