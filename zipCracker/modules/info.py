@@ -17,6 +17,49 @@ __commands__ = {
 zip_info: dict[str, str] = {}
 
 
+def detect_archive_format(file_path: str):
+    """
+    Detect the archive format of a file.
+    """
+    try:
+        f = open(file_path, errors="ignore")
+        zip_info["Encoding"] = f.encoding
+
+        header: str = f.read(4)
+
+        f.close()
+
+        # Detect file format based on header data
+        if header[:2] == "\x50\x4b":
+            get_zip_info(file_path)
+        elif header == "\x52\x61\x72\x21":
+            get_rar_info(file_path)
+        elif header[:2] == "\x37\x7a":
+            get_7z_info(file_path)
+        else:
+            cli.print_and_log(f"Cannot detect file format by its structure. Falling back to file extensions...",
+                              "warn", __name__)
+            # Fallback: Use file extensions to detect
+            if file_path.lower().endswith(".zip"):
+                get_zip_info(file_path)
+            elif file_path.lower().endswith(".rar"):
+                get_rar_info(file_path)
+            elif file_path.lower().endswith(".7z"):
+                get_7z_info(file_path)
+            else:
+                cli.print_and_log(f"The file {file_path} isn't supported yet.", "error", __name__)
+    except NotImplementedError:
+        cli.print_and_log(f"The file {file_path} format isn't supported yet.", "error", __name__)
+        cli.exit_with_code(1)
+    except FileNotFoundError:
+        cli.print_and_log(f"The file {file_path} does not exist.", "error", __name__)
+        cli.exit_with_code(1)
+    except IOError:
+        cli.print_and_log(f"The file {file_path} cannot be opened.", "error", __name__)
+        cli.exit_with_code(128)
+    return 0
+
+
 def get_zip_info(file_path: str):
     """
     Get basic information of a ZIP file.
@@ -57,26 +100,4 @@ def run(args: list[str]):
     elif len(args) >= 2:
         cli.print_and_log(f"Too many arguments, expecting 1, got {len(args)}", "error", __name__)
     else:
-        name = args[0]
-        try:
-            f = open(name)
-            f.close()
-
-            # It feels not precise here. Should judge file formats based on their file structure.
-            if name.lower().endswith(".zip"):
-                get_zip_info(name)
-            elif name.lower().endswith(".rar"):
-                get_rar_info(name)
-            elif name.lower().endswith(".7z"):
-                get_7z_info(name)
-            else:
-                cli.print_and_log(f"The file {name} isn't supported yet.", "error", __name__)
-        except NotImplementedError:
-            cli.print_and_log(f"The file {name} format isn't supported yet.", "error", __name__)
-            cli.exit_with_code(1)
-        except FileNotFoundError:
-            cli.print_and_log(f"The file {name} does not exist.", "error", __name__)
-            cli.exit_with_code(1)
-        except IOError:
-            cli.print_and_log(f"The file {name} cannot be opened.", "error", __name__)
-            cli.exit_with_code(128)
+        detect_archive_format(args[0])
