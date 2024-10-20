@@ -7,7 +7,7 @@ import zipCracker.util.logger as logger
 import zipCracker.util.cli as cli
 
 PREFIX = "zipCracker.modules."
-ALL_MODULES: list[str] = ["info"]
+ALL_MODULES: list[str] = ["info", "headcrack"]
 """Modules to be loaded. Must use full name."""
 
 COMMANDS: dict[str, str]
