@@ -8,6 +8,8 @@ from zipCracker.util.datetime import format_struct_time
 
 initialized: bool = False
 
+log_debug: bool = False
+
 LOG_PATH_DEFAULT: str = "logs"
 LOGFILE_DEFAULT: str = "cracker"
 LOG_HEADER: dict[str, str] = {"error": "Error", "warn": "Warning", "info": "Info", "debug": "Debug"}
@@ -115,4 +117,5 @@ def debug(message: str, module: str) -> None:
 
     记录调试级消息，应仅在调试开关打开时写入。
     """
-    log("debug", module, message)
+    if log_debug:
+        log("debug", module, message)

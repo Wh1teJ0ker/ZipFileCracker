@@ -49,7 +49,7 @@ def judge_rar(file_path: str):
 
 
 def run(args: list[str]):
-    if len(args) == 0:
+    if len(args) == 0 or "-h" in args or "--help" in args:
         cli.print_and_log(__doc__, "warn", __name__)
     elif len(args) >= 2:
         cli.print_and_log(f"Too many arguments, expecting 1, got {len(args)}", "error", __name__)
