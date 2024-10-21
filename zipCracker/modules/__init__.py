@@ -19,7 +19,8 @@ def load_modules():
     """
     for module in ALL_MODULES:
         try:
-            loaded_module = __import__(PREFIX + module)
+            __import__(PREFIX + module)
+            loaded_module = getattr(zipCracker.modules, module)
             logger.info(f"Loading module: {module}", __name__)
 
             if not hasattr(loaded_module, "__description__") or not hasattr(loaded_module, "__doc__"):
