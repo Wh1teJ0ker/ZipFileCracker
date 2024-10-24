@@ -25,6 +25,9 @@ By {" & ".join(zipCracker.__authors__)}, licensed under {zipCracker.__license__}
 
 
 def print_help_list():
+    """
+    Get a list of available commands and their usage if possible.
+    """
     cli.print_and_log("Available commands:", module=__name__)
     
     for i in ALL_MODULES:
@@ -44,6 +47,9 @@ def print_help_list():
 
 
 def print_help(module: str):
+    """
+    Print the help text for a specified module.
+    """
     mod = zipCracker.core.get_module(module)
     
     if mod is None:
