@@ -10,14 +10,11 @@ If we should print verbose output.
 This is subject to change with command line arguments.
 """
 
-COLOR_POST = "\033[0m"
-"""A special character sequence to stop coloring and styling."""
-
 SYM: dict[str, str] = {
-    "error": COLORS["bold"] + COLORS["red"] + "Error" + COLOR_POST,
-    "warn": COLORS["bold"] + COLORS["yellow"] + "Warning" + COLOR_POST,
-    "info": COLORS["bold"] + COLORS["blue"] + "Info" + COLOR_POST,
-    "debug": COLORS["bold"] + "Verbose" + COLOR_POST
+    "error": COLORS["bold"] + COLORS["red"] + "Error" + COLORS["reset"],
+    "warn": COLORS["bold"] + COLORS["yellow"] + "Warning" + COLORS["reset"],
+    "info": COLORS["bold"] + COLORS["blue"] + "Info" + COLORS["reset"],
+    "debug": COLORS["bold"] + "Verbose" + COLORS["reset"]
 }
 
 
