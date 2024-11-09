@@ -1,7 +1,7 @@
 """Simple command line handling."""
 import sys
 
-from zipCracker.util import COLORS
+from zipCracker.util import *
 from zipCracker.util import logger
 
 ARG_VERBOSE = False
@@ -11,10 +11,10 @@ This is subject to change with command line arguments.
 """
 
 SYM: dict[str, str] = {
-    "error": COLORS["bold"] + COLORS["red"] + "Error" + COLORS["reset"],
-    "warn": COLORS["bold"] + COLORS["yellow"] + "Warning" + COLORS["reset"],
-    "info": COLORS["bold"] + COLORS["blue"] + "Info" + COLORS["reset"],
-    "debug": COLORS["bold"] + "Verbose" + COLORS["reset"]
+    "error": bold(COLORS["red"] + "Error"),
+    "warn": bold(COLORS["yellow"] + "Warning"),
+    "info": bold(COLORS["blue"] + "Info"),
+    "debug": bold("Verbose")
 }
 
 
