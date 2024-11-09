@@ -62,4 +62,6 @@ def print_help(module: str):
         if not hasattr(mod, "__doc__"):
             cli.print_and_log(f"The module {module} doesn't have a valid doc string.", "warn", __name__)
         else:
-            cli.print_and_log(getattr(mod, "__doc__"), "info", __name__)
+            doc_lines = getattr(mod, "__doc__").splitlines()
+            for num, line in enumerate(doc_lines):
+                cli.print_and_log(line, "info", __name__, continuous=num != 0)

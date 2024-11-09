@@ -18,7 +18,21 @@ SYM: dict[str, str] = {
 }
 
 
-def print_and_log(msg: str, level: str = "info", module: str = "Generic", nolog: bool = False):
+def get_len(s: str) -> int:
+    """
+    Get the real length of a formatted string.
+    """
+    real_length: int = len(s)
+    mark_regex = re.compile(r"(\033\[(?:[0-9];)?[0-9]+m)+")
+    
+    match_list = re.findall(mark_regex, s)
+    
+    for match in match_list:
+        real_length -= len(match)
+        
+    return real_length
+
+def print_and_log(msg: str, level: str = "info", module: str = "Generic", nolog: bool = False, continuous: bool = False):
     """
     Print prettified message and log it when necessary.
 
@@ -26,9 +40,12 @@ def print_and_log(msg: str, level: str = "info", module: str = "Generic", nolog:
     """
 
     if level != "debug" or (level == "debug" and ARG_VERBOSE):
-        print("{0}: {1}".format(SYM[level], msg))
+        if continuous:
+            print(f"{'.' * get_len(SYM[level])}: {msg}")
+        else:
+            print(f"{SYM[level]}: {msg}")
 
-    if nolog is not True:
+    if nolog is False:
         try:
             logger_fun = getattr(logger, level)
             logger_fun(msg, module)
