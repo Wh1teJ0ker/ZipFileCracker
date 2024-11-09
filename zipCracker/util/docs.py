@@ -50,6 +50,10 @@ def print_help(module: str):
     """
     Print the help text for a specified module.
     """
+    if module == "help":
+        print_help_list()
+        return
+
     mod = zipCracker.core.get_module(module)
     
     if mod is None:

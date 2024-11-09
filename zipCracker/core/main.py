@@ -27,6 +27,8 @@ def get_nonswitch_arg(args: list[str]):
 
 
 def main():
+    help_flag = False
+    
     args: list[str] = sys.argv[1:]
     logger.debug(f"Command line arguments: {args}", "Main")
     modules.load_modules()
@@ -35,18 +37,24 @@ def main():
         cli.print_and_log(msg="Specify a command first. Execute with -h to get a list of commands.",
                           level="warn", module=__name__)
     else:
-        print(args)
         if "--verbose" in args:
             # Enable debug logging and output.
             # Verbose switch applies to the main module itself.
             # 启用调试信息的记录与输出，应用到全局。
+            del args[args.index("--verbose")]
             logger.log_debug = True
             cli.ARG_VERBOSE = True
+        
+        # Replace all help variants into one
+        for arg in args:
+            arg.replace("--help", "help")
+            arg.replace("-h", "help")
+            if arg == "help":
+                help_flag = True
+        
         if "--version" in args:
             docs.print_version()
-        elif (len(args) == 1 or (len(args) == 2 and "--verbose" in args)) and "help" in args:
-            docs.print_help_list()
-        elif (len(args) == 2 or (len(args) == 3 and "--verbose" in args)) and "help" in args:
+        elif help_flag:
             docs.print_help(args[args.index("help") - 1])
         else:
             pure_args = get_nonswitch_arg(args)
